@@ -1,2 +1,0 @@
-C:/Users/01142100/source/repos/HammingOne/HammingOne/CMakeFiles/ALL_BUILD.dir
-C:/Users/01142100/source/repos/HammingOne/HammingOne/CMakeFiles/ZERO_CHECK.dir
