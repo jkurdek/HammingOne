@@ -1,10 +1,13 @@
+
 # HammingOne
-GPU CUDA hash map implementation for counting number of vector pairs with Hamming distance equal to 1.
 
-The program contains a cpu generator (/Generator/generator.cpu) which can be used to generate an arbitrary number of binary vectors
-It should be called: generator N L (N - number of vectors, L - length of vectors).
+## Goal:
+Having a stet of long bit sequences find all pairs with the Hamming distance equal to 1.
 
-The main part of the the program is GPU HammingOne solution reading a file and counting number of pairs with Hamming distance equal to 1.
-The result is achieved by cuckoo hashing all the vectors and then checking whether each possible pairs is stored in the hash table.
+## Implementation:
 
-
+ - The program utilizes mutliple CUDA threads in order to parallelize the computation
+ - In order to efficiently find the pairs a hash map was implemented, cuckoo hashing was used as it is the most suitable for GPU computations with multiple threads.
+ ## How to use:
+ 1.  A generator of binary vectors can be found in /generator directory.  Using it one may generate a variable sized set of vectors of desired length. Each element of the set will have a pair with the Hamming distance equal to 1.
+ 2.  The main part of the program is HPU HammingOne solution that reads a file containing the vectors and counts the number of pairs with the Hamming distance equal to 1.
