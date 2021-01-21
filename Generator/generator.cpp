@@ -14,22 +14,22 @@ using namespace std;
 
 //half of the generated vectors is created using bernoulli distribution
 //the other half is created by changing bits so that every element has a pair
-void generateRandomSequence(int n, int length, string fileName)
+void generateRandomSequence(int vector_count, int vector_length, string fileName)
 {
 
     ofstream myfile(fileName);
     vector<int> randomSequence;
-    randomSequence.resize(length);
+    randomSequence.resize(vector_length);
 
     random_device rd;
     mt19937 generator(rd());
     bernoulli_distribution distribution(0.5);
 
-    n /= 2;
+    vector_count /= 2;
 
     if (myfile.is_open())
     {
-        while (n--)
+        while (vector_count--)
         {
             generate(randomSequence.begin(), randomSequence.end(), [&generator, &distribution] { return distribution(generator); });
 
@@ -39,7 +39,7 @@ void generateRandomSequence(int n, int length, string fileName)
             }
 
             myfile << endl;
-            auto c = n % length;
+            auto c = vector_count % vector_length;
 
             randomSequence[c] = 1 - randomSequence[c];
             
@@ -62,13 +62,13 @@ int main(int argc, char **argv)
 
     if (argc != 3)
     {
-        ERR("Wrong number of arguments");
+        ERR("You need to provide number and length of vectors to be generated");
     }
 
-    int n = atoi(argv[1]);
-    int l = atoi(argv[2]);
+    int vector_count = atoi(argv[1]);
+    int vector_length = atoi(argv[2]);
 
-    generateRandomSequence(n, l, "input.txt");
+    generateRandomSequence(vector_count, vector_length, "input.txt");
 
     return 0;
 }
